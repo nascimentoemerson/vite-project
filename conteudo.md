@@ -1,17 +1,17 @@
-# Sessões 
+# Sessões
 
 - User
-- Teacher 
+- Teacher
 
-# Classroom 
+# Classroom
 
-- Seleção de turma que o professor possui 
+- Seleção de turma que o professor possui
 - Visualização de chamadas concluídas (com filtros)
 - Criar chamada
-- Número de faltas de cada aluno 
+- Número de faltas de cada aluno
 
 # Chamada
 
 - Refetch de dados
-- Usuários que responderam 
-- Usuários que não responderam 
+- Usuários que responderam
+- Usuários que não responderam

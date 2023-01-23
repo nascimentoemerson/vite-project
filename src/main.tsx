@@ -5,6 +5,6 @@ import { Login } from './components/pages/login'
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
-    <Login/>
+    <Login />
   </React.StrictMode>
 )

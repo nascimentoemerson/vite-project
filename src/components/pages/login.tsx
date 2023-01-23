@@ -1,3 +1,9 @@
+import { LoginForm } from "../moleculas/login-form";
+
 export function Login() {
-    return <div>Login</div>
+    return (
+        <div>
+            <LoginForm />
+        </div>
+    )
 }
