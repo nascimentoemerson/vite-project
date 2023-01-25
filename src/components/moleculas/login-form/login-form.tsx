@@ -30,7 +30,7 @@ export function LoginForm() {
         const userData = await api.login(loginPayload)
         setLoading(false)
         console.log('user-data', userData)
-        if (userData.statusCode) {
+        if (!userData) {
             setError(true)
             return
         } else {
