@@ -14,8 +14,11 @@ export const StyledLoginForm = styled.div`
   }
 `;
 
+export type StyledFomrProps = {
+  error: boolean;
+}
 
-export const StyledForm = styled.form`
+export const StyledForm = styled.form<StyledFomrProps>`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -27,6 +30,7 @@ export const StyledForm = styled.form`
     padding: 3px 5px;
     margin: 5px;
     border-radius: 5px;
+    border: ${(props) => (props.error ? "solid 2px red" : "none")};
     height: 35px;
     background: ${(props) => props.theme.darkTheme.fg};
     font-size: 1.2rem;
