@@ -6,6 +6,7 @@ export const FormContainer = styled.section`
   align-items: center;
   justify-content: center;
   width: 100%;
+
   form {
     display: flex;
     flex-direction: column;

@@ -131,7 +131,7 @@ export const api = {
     try {
       const response = await axios.post("/user", payload);
       return response.data;
-     } catch (err: any) {
+    } catch (err: any) {
       HandleError({ message: err.message });
     }
   },

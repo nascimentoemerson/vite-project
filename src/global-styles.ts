@@ -17,25 +17,26 @@ export const GlobalStyle = createGlobalStyle`
     }
 `;
 
-const colors = { 
-    lightPrimary: '#F2F2F2',
-    lightSecondary: '#D97979',
-    darkPrimary: '#262526',
-    darkSecondary: '#D91E1E'
+const colors = {
+  lightPrimary: "#D9D9D9",
+  lightSecondary: "#8C8C8C",
+  middle: "#595959",
+  darkPrimary: "#0D0D0D",
+  darkSecondary: "#404040",
 };
 
 export const theme = {
-    lightTheme: {
-        bg: colors.lightPrimary,
-        fg: colors.darkPrimary,
-    },
-    darkTheme: {
-        bg: colors.darkPrimary,
-        fg: colors.lightPrimary,
-    }
+  lightTheme: {
+    bg: colors.lightPrimary,
+    fg: colors.darkPrimary,
+  },
+  darkTheme: {
+    bg: colors.darkPrimary,
+    fg: colors.lightPrimary,
+  },
 };
 
 export interface Theme {
-    bg: string;
-    fg: string;
-};
+  bg: string;
+  fg: string;
+}
