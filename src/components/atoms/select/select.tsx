@@ -1,4 +1,3 @@
-
 import { SelectProps } from "./types";
 
 export function Select(props: SelectProps) {

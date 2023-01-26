@@ -47,24 +47,13 @@ export function UpdateClassroomForm({
 
     async function handleSubmit(e: FormEvent<HTMLFormElement>) {
         e.preventDefault();
-        // const data = inputsData.reduce((acc, input) => {
-        //   return { ...acc, [input.name]: e.currentTarget[input.name].value };
-        // }, {}) as any;
-
-        // console.log({
-        //   ...data,
-        //   teachers: [
-        //     ...classroom.teachers.filter((teacher) => teacher.id !== data.teacher),
-        //     data.teacher,
-        //   ],
-        // });
-
+   
         const data = {
             name: e.currentTarget.Name.value,
             theme: e.currentTarget.theme.value,
             subject: e.currentTarget.subject.value,
             teachersIds: [classroom.teachers[0].id],
-            // studentsIds: [e.currentTarget.students.value ?? null],
+
         };
 
         console.log({ ...data, id: classroom.id });
