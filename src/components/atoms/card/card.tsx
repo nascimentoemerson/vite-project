@@ -1,26 +1,25 @@
-import { ReactNode, useState } from "react";
-import { ClickedButton } from "../../pages/sala/styles";
+import { useNavigate } from "react-router-dom";
+import { ClassroomCardButton } from "./styles";
 
 export type CardProps = {
+    id: string;
     name: string;
-    description: string;
-    selectCard: (data: string) => void;
+    theme: string;
+    color: string;
 };
 
-export function Card({ name, description, selectCard }: CardProps) {
-    const [isActive, setIsActive] = useState<boolean>(false);
+export function ClassroomCard({ id, name, theme, color }: CardProps) {
+    const navigate = useNavigate();
 
     return (
-        <ClickedButton
-            isSelect={isActive}
+        <ClassroomCardButton
+            backgroundColor={color}
             onClick={() => {
-                setIsActive(!isActive);
-                selectCard(name);
+                navigate("/classroom/" + id);
             }}
-            type="button"
         >
             <h2>{name}</h2>
-            <p>{description}</p>
-        </ClickedButton>
+            <h3>{theme}</h3>
+        </ClassroomCardButton>
     );
 }
