@@ -112,8 +112,8 @@ export const api = {
         classroomId,
       });
       return response.data;
-    } catch (err) {
-      HandleError(err);
+    } catch (err: any) {
+      HandleError({ message: err.message });
     }
   },
 

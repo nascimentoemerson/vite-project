@@ -66,7 +66,6 @@ export function ClassroomPage({ classroom }: ClassroomCardProps) {
                 </section>
             </CardInfoContainer>
             <AttendancesList selectedClassroom={classroomData.id} />
-
         </ClassroomCardContainer>
     );
 }

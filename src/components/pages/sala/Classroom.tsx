@@ -1,24 +1,15 @@
 import { useEffect, useState } from "react";
 import { api } from "../../../utils/api/api";
+import { colors } from "../../../utils/colors";
 import { Classroom } from "../../../utils/types/data";
+import { ClassroomCard } from "../../atoms/classroom-card/classroom-card";
 import { Select } from "../../atoms/select/select";
-import AttendancesList from "../../celules/attendances-lists/attendances-lists";
-import { ClassroomCard } from "../../moleculas/classroom-card/classroom-card";
-import { CreateClassroomForm } from "../../celules/create-classroom-form/create-classroom-form";
-import { UpdateClassroomForm } from "../../celules/update-classroom-form/update-classroom-form";
-import { ClassroomCardOptionsContainer } from "../../moleculas/classroom-card/styles";
+import { ClassroomContentDiv, ClassroomDiv } from "./styles";
 
 export function Classroom() {
     const [classrooms, setClassrooms] = useState<Classroom[]>([]);
-    const [selectedClassroom, setSelectedClassroom] = useState<
-        string | undefined
-    >();
-    const [control, setControl] = useState<boolean>(false);
-    const [isEditingMode, setIsEditingMode] = useState<boolean>(false);
-
-    const classroomSelectedData = classrooms.find(
-        (classroom) => classroom.id === selectedClassroom
-    );
+    const [search, setSearch] = useState<string>("");
+    const [paramToFilter, setParamToFilter] = useState<string>("name");
 
     console.log(JSON.parse(localStorage.getItem("user") ?? "").role);
 
@@ -27,69 +18,52 @@ export function Classroom() {
         setClassrooms(data);
     }
 
-    function getSelectedClassroom(value: string) {
-        setSelectedClassroom(value);
-    }
-
-    function handleControl() {
-        setControl(!control);
-    }
-
-    function handleEditMode() {
-        setIsEditingMode(!isEditingMode);
-    }
-
-    async function handleDeleteClassroom() {
-        await api.deleteClassroom(classroomSelectedData?.id ?? "");
-        handleControl();
-    }
+    const filteredClassrooms = classrooms.filter((classroom) => {
+        if (paramToFilter === "name")
+            return classroom.name.toUpperCase().includes(search.toUpperCase());
+        if (paramToFilter === "theme")
+            return classroom.theme.toUpperCase().includes(search.toUpperCase());
+        if (paramToFilter === "subject")
+            return classroom.subject.toUpperCase().includes(search.toUpperCase());
+    });
 
     useEffect(() => {
         findClassrooms();
-    }, [control]);
+    }, []);
+
+    console.log(search);
 
     return (
-        <div>
-            <h2>Clasrooms</h2>
-            <Select
-                options={classrooms.map((classroom) => {
-                    return { name: classroom.name, value: classroom.id };
-                })}
-                selectedOption={getSelectedClassroom}
+        <ClassroomDiv>
+            <input
+                type="text"
+                onChange={(e) => {
+                    setSearch(e.currentTarget.value);
+                }}
             />
-            <div>
-                {selectedClassroom && (
-                    <ClassroomCard
-                        classroom={classroomSelectedData ?? ({} as Classroom)}
-                    />
-                )}
-            </div>
-            <ClassroomCardOptionsContainer>
-                {selectedClassroom && (
-                    <>
-                        <button
-                            onClick={() => {
-                                handleEditMode();
-                            }}
-                        >
-                            Edit this classroom
-                        </button>
-                        <button onClick={handleDeleteClassroom}>
-                            Delete this classroom
-                        </button>
-                    </>
-                )}
-                {isEditingMode ? (
-                    <UpdateClassroomForm
-                        handleControl={handleControl}
-                        classroom={classroomSelectedData ?? ({} as Classroom)}
-                        changeEditingMode={handleEditMode}
-                    />
-                ) : (
-                    <CreateClassroomForm handleControl={handleControl} />
-                )}
-            </ClassroomCardOptionsContainer>
-            <AttendancesList selectedClassroom={selectedClassroom} />
-        </div>
+            <Select
+                selectedOption={setParamToFilter}
+                options={[
+                    { name: "Name", value: "name" },
+                    { name: "Theme", value: "theme" },
+                    { name: "Subject", value: "subject" },
+                ]}
+            />
+            <ClassroomContentDiv>
+                {filteredClassrooms.map((classroom) => {
+                    const color =
+                        colors[Math.floor(Math.random() * colors.length - 1) + 1];
+                    return (
+                        <ClassroomCard
+                            key={classroom.id}
+                            id={classroom.id}
+                            name={classroom.name}
+                            theme={classroom.theme}
+                            color={color}
+                        />
+                    );
+                })}
+            </ClassroomContentDiv>
+        </ClassroomDiv>
     );
 }
