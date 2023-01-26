@@ -1,5 +1,5 @@
 import { ReactNode, useState } from "react";
-import { ClickedButton } from "../../pages/classroom/styles";
+import { ClickedButton } from "../../pages/sala/styles";
 
 export type CardProps = {
     name: string;
