@@ -27,30 +27,29 @@ axios.interceptors.response.use(
     if (error.response.status === 401) {
       if (localStorage.getItem("token")) localStorage.removeItem("token");
     }
-    throw new Error(error.response.data.message);
   }
 );
 
-
-
-
 export const api = {
-    login: async ({email, password} :LoginRequest) => {
-        try {
-            const response = await axios.post('/Authorization/login', {email, password})
-            localStorage.setItem("token", response.data.token)
-            return response.data
-        } catch (err) {
-            alert(err)
-        }
-    },
+  login: async ({ email, password }: LoginRequest) => {
+    try {
+      const response = await axios.post("/Authorization/login", {
+        email,
+        password,
+      });
+      localStorage.setItem("token", response.data.token);
+      return response.data;
+    } catch (err) {
+      alert(err);
+    }
+  },
 
-    getClassrooms: async () => {
+  getClassrooms: async () => {
     try {
       const response = await axios.get("/classroom");
       return response.data;
     } catch (err) {
-        alert(err)
+      alert(err);
     }
   },
-}
+};
