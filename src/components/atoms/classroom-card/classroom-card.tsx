@@ -15,7 +15,7 @@ export function ClassroomCard({ id, name, theme, color }: CardProps) {
         <ClassroomCardButton
             backgroundColor={color}
             onClick={() => {
-                navigate("/classroom/" + id);
+                navigate(`/classroom/${id}`);
             }}
         >
             <h2>{name}</h2>
