@@ -20,6 +20,8 @@ export function Classroom() {
         (classroom) => classroom.id === selectedClassroom
     );
 
+    console.log(JSON.parse(localStorage.getItem("user") ?? "").role);
+
     async function findClassrooms() {
         const data = await api.getClassrooms();
         setClassrooms(data);
@@ -41,11 +43,10 @@ export function Classroom() {
         await api.deleteClassroom(classroomSelectedData?.id ?? "");
         handleControl();
     }
+
     useEffect(() => {
         findClassrooms();
     }, [control]);
-
-
 
     return (
         <div>
