@@ -1,43 +1,51 @@
-import { useState } from "react";
-import { Select } from "../../atoms/select/select";
+import { useState, useEffect } from "react";
+import { api } from "../../../utils/api/api";
+
+export type classroom = {
+    id: string;
+    name: string;
+    subject: string;
+    theme: string;
+};
 
 export function Classroom() {
-    const [selectedClassroom, setSelectedClassroom] = useState<string>();
-    const [selectedModule, setSelectedModule] = useState<string>();
+    const [classrooms, setClassrooms] = useState<classroom[]>([])
+    const [search, setSearch] = useState("")
+    const [sortedClassrooms, setSortedClassrooms] = useState<classroom[]>([])
 
-    const options = ["Turma 1", "Turma 2", "Turma 3"];
-
-    const module = ["Módulo 1", "Módulo 2", "Módulo 3"];
-
-    function resultSelect(value: string) {
-        setSelectedModule(value);
-        console.log(selectedModule);
+    async function findClassrooms() {
+        const classes = await api.getClassrooms()
+        setClassrooms(classes)
     }
 
-    const alunosTurma1 = ["Átila", "Tiago", "João", "Felipe", "Bruno"];
+    useEffect(() => {
+        console.log("rodou useEffect");
+        findClassrooms();
+    }, []);
 
-    const alunosTurma2 = ["Matheus", "Lucas", "Olavo", "Yago"];
+    useEffect(() => {
+        setSortedClassrooms(classrooms.filter(classroom => classroom.name.includes(search)))
+    }, [search])
 
-    console.log(selectedClassroom);
+    console.log(classrooms)
+
     return (
         <div>
             <h2>Clasroom</h2>
-            <Select options={options} selectedOption={setSelectedClassroom} />
-            <Select options={module} selectedOption={resultSelect} />
-            {selectedModule === "Módulo 1" && (
-                <>
-                    {alunosTurma1.map((aluno) => {
-                        return <h2>{aluno}</h2>;
-                    })}
-                </>
-            )}
-            {selectedModule === "Módulo 2" && (
-                <>
-                    {alunosTurma2.map((aluno) => {
-                        return <h2>{aluno}</h2>;
-                    })}
-                </>
-            )}
+            <input type="text" onChange={(e) => {
+                setSearch(e.currentTarget.value)
+            }}
+            placeholder="Search"
+            />
+            {
+                classrooms.map((classroom) => (
+                    <div key={classroom.id}>
+                        <h2>{classroom.name}</h2>
+                        <p>{classroom.subject}</p>
+                    </div>
+                ))
+            }
+
         </div>
     );
 }
