@@ -27,29 +27,11 @@ export function Classroom() {
       return classroom.subject.toUpperCase().includes(search.toUpperCase());
   });
 
-  // 1 array de dependencias vazio = executa uma vez quando o component é montado
   useEffect(() => {
     findClassrooms();
   }, []);
 
-  // 2 array de dependencias com valor = executa toda vez que o valor mudar
-  // useEffect(() => {
-  //   console.log("rodou useEffect 2");
-  //   setTimeout(() => {
-  //     console.log("rodou timeout");
-  //     setControl(!control);
-  //   }, 2000);
-  //   findClassrooms();
-  // }, [control]);
-
-  // 3 sem array de dependencias = executa toda vez que um state muda
-  // useEffect(() => {
-  //   console.log("rodou useEffect 3");
-  //   findClassrooms();
-  // });{
-
-  console.log(search);
-
+  
   return (
     <ClassroomDiv>
       <input

@@ -21,5 +21,6 @@ export const ClassroomCardButton = styled.button<ClassroomButtonProps>`
 
   :hover {
     transform: scale(1.15);
+    color: white;
   }
 `;

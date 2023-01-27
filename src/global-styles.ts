@@ -18,11 +18,8 @@ export const GlobalStyle = createGlobalStyle`
 `;
 
 const colors = {
-  lightPrimary: "#D9D9D9",
-  lightSecondary: "#8C8C8C",
-  middle: "#595959",
-  darkPrimary: "#0D0D0D",
-  darkSecondary: "#404040",
+  lightPrimary: "#FFFFFF",
+  darkPrimary: "#1586C2",
 };
 
 export const theme = {
@@ -39,4 +36,4 @@ export const theme = {
 export interface Theme {
   bg: string;
   fg: string;
-}
+};

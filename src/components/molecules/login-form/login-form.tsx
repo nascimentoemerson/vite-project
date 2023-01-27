@@ -1,5 +1,5 @@
 import { FormEvent, useState } from "react";
-import { StyledForm, StyledLoginForm } from "./styles";
+import { StyledForm, StyledLoginForm, StyledButton, StyledButtonLogin } from "./styles";
 import { BsEyeFill, BsEyeSlashFill } from "react-icons/bs";
 import { api } from "../../../utils/api/api";
 import { useNavigate } from "react-router-dom";
@@ -40,33 +40,33 @@ export function LoginForm() {
         <Loading />
       ) : (
         <StyledLoginForm>
-          <h2>Login</h2>
+          <h2>Bem-vindo</h2>
           <StyledForm onSubmit={handleSubmit} error={error}>
-            <input placeholder="Seu email" name="email" required />
+            <input placeholder="Digite Seu E-mail" name="email" required />
             <div>
               <input
-                placeholder="Sua senha"
+                placeholder="Digite Sua Senha"
                 type={showPassword ? "text" : "password"}
                 name="password"
                 required
               />
               <button type="button" onClick={handleShowPassword}>
                 {showPassword ? (
-                  <BsEyeSlashFill size={25} />
-                ) : (
                   <BsEyeFill size={25} />
+                ) : (
+                  <BsEyeSlashFill size={25} />
                 )}
               </button>
             </div>
-            <button type="submit">Login</button>
+              <StyledButtonLogin id="btn" type="submit">Login</StyledButtonLogin>
           </StyledForm>
-          <button
+          <StyledButton
             onClick={() => {
               navigate("/register");
             }}
           >
             Not have Account?
-          </button>
+          </StyledButton>
         </StyledLoginForm>
       )}
     </>

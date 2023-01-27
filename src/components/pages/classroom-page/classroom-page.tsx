@@ -1,12 +1,9 @@
 import { useEffect, useState } from "react";
 import { api } from "../../../utils/api/api";
 import { Classroom } from "../../../utils/types/data";
-import { CreateClassroomForm } from "../../celules/create-classroom-form/create-classroom-form";
-import { UpdateClassroomForm } from "../../celules/update-classroom-form/update-classroom-form";
 import {
   CardInfoContainer,
   ClassroomCardContainer,
-  ClassroomCardOptionsContainer,
 } from "./styles";
 import { useParams } from "react-router-dom";
 import { HandleError } from "../../../utils/errors/handle-error-modal";
@@ -66,31 +63,7 @@ export function ClassroomPage({ classroom }: ClassroomCardProps) {
         </section>
       </CardInfoContainer>
       <AttendancesList selectedClassroom={classroomData.id} />
-      {/* <ClassroomCardOptionsContainer>
-        {selectedClassroom && (
-          <>
-            <button
-              onClick={() => {
-                handleEditMode();
-              }}
-            >
-              Edit this classroom
-            </button>
-            <button onClick={handleDeleteClassroom}>
-              Delete this classroom
-            </button>
-          </>
-        )}
-        {isEditingMode ? (
-          <UpdateClassroomForm
-            handleControl={handleControl}
-            classroom={classroomSelectedData ?? ({} as Classroom)}
-            changeEditingMode={handleEditMode}
-          />
-        ) : (
-          <CreateClassroomForm handleControl={handleControl} />
-        )}
-      </ClassroomCardOptionsContainer> */}
+
     </ClassroomCardContainer>
   );
 }

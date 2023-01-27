@@ -1,5 +1,4 @@
 import { useState } from "react";
-
 export function Home() {
   const [number, setNumber] = useState<number>(0);
 
