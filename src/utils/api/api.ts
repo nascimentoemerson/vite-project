@@ -7,7 +7,7 @@ import {
 } from "../types/requests";
 import { HandleError } from "../errors/handle-error-modal";
 
-axios.defaults.baseURL = "https://vite-project-nine-alpha.vercel.app";
+axios.defaults.baseURL = "https://back-ii-production.up.railway.app/";
 axios.defaults.headers.post["Content-Type"] = "application/json";
 
 axios.interceptors.request.use(
