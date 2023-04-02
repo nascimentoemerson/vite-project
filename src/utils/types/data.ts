@@ -11,8 +11,8 @@ export type User = {
 
 export type LoginResponse = {
   token: string;
-  user: string
-}
+  user: User;
+};
 
 export type Classroom = {
   id: string;
@@ -30,5 +30,5 @@ export type AttendancePayload = {
   startDate: string;
   endDate: string;
   day: string;
-  students: User[];
+  students?: User[];
 };

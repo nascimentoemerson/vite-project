@@ -105,7 +105,7 @@ export const api = {
     }
   },
 
-   enterInClassroomWithStudent: async (classroomId: string) => {
+  enterInClassroomWithStudent: async (classroomId: string) => {
     try {
       const response = await axios.patch("/classroom/enter-student", {
         id: classroomId,
@@ -153,10 +153,23 @@ export const api = {
     }
   },
 
-
   getAttendanceLists: async () => {
     try {
       const response = await axios.get("/attendance-list");
+      return response.data;
+    } catch (err: any) {
+      HandleError({ message: err.message });
+    }
+  },
+
+  registerOnAttendance: async (attendanceId: string) => {
+    try {
+      const response = await axios.post(
+        "/attendance-list/registerInAttendanceList",
+        {
+          attendanceListId: attendanceId,
+        }
+      );
       return response.data;
     } catch (err: any) {
       HandleError({ message: err.message });
