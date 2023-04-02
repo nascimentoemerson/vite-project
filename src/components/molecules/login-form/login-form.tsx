@@ -1,5 +1,5 @@
 import { FormEvent, useState } from "react";
-import { StyledForm, StyledLoginForm, StyledButton, StyledButtonLogin } from "./styles";
+import { StyledForm, StyledLoginForm } from "./styles";
 import { BsEyeFill, BsEyeSlashFill } from "react-icons/bs";
 import { api } from "../../../utils/api/api";
 import { useNavigate } from "react-router-dom";
@@ -24,11 +24,20 @@ export function LoginForm() {
       email: e.currentTarget.email.value,
       password: e.currentTarget.password.value,
     };
+    
+    
     const userData = await api.login(loginPayload);
     setLoading(false);
 
     if (!userData) {
       setError(true);
+      return;
+    }
+
+    
+
+    if (userData.role === "student" && userData.classroomStudentId) {
+      navigate("/classroom/" + userData.classroomStudentId);
       return;
     }
     navigate("/classroom");
@@ -40,33 +49,33 @@ export function LoginForm() {
         <Loading />
       ) : (
         <StyledLoginForm>
-          <h2>Bem-vindo</h2>
+          <h2>Login</h2>
           <StyledForm onSubmit={handleSubmit} error={error}>
-            <input placeholder="Digite Seu E-mail" name="email" required />
+            <input placeholder="Seu email" name="email" required />
             <div>
               <input
-                placeholder="Digite Sua Senha"
+                placeholder="Sua senha"
                 type={showPassword ? "text" : "password"}
                 name="password"
                 required
               />
               <button type="button" onClick={handleShowPassword}>
                 {showPassword ? (
-                  <BsEyeFill size={25} />
-                ) : (
                   <BsEyeSlashFill size={25} />
+                ) : (
+                  <BsEyeFill size={25} />
                 )}
               </button>
             </div>
-              <StyledButtonLogin id="btn" type="submit">Login</StyledButtonLogin>
+            <button type="submit">Login</button>
           </StyledForm>
-          <StyledButton
+          <button
             onClick={() => {
               navigate("/register");
             }}
           >
             Not have Account?
-          </StyledButton>
+          </button>
         </StyledLoginForm>
       )}
     </>
