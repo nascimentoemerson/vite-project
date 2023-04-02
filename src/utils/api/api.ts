@@ -47,9 +47,17 @@ export const api = {
         password,
       });
       localStorage.setItem("token", response.data.token);
-      localStorage.setItem("user", JSON.stringify(response.data.user));
 
       return response.data.user;
+    } catch (err: any) {
+      HandleError({ message: err.message });
+    }
+  },
+
+  authorization: async () => {
+    try {
+      const response = await axios.get<User>("/Authorization");
+      return response.data;
     } catch (err: any) {
       HandleError({ message: err.message });
     }
